@@ -43,8 +43,7 @@ public class ProductService {
 
     @Transactional(rollbackFor = {SQLException.class})
     public ResponseEntity<Message> update(Product product) {
-        Optional<Product> existsProduct = productRepository.findByName(product.getName());
-        if (existsProduct.isPresent()) {
+        if (productRepository.existsById(product.getId())) {
             Product updatedProduct = productRepository.saveAndFlush(product);
             return new ResponseEntity<>(new Message("ok", updatedProduct), HttpStatus.OK);
         }

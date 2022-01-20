@@ -24,6 +24,11 @@ public class SubcategoryService {
     }
 
     @Transactional(readOnly = true)
+    public ResponseEntity<Message> findAllByCategory(long id) {
+        return new ResponseEntity<>(new Message("ok", subcategoryRepository.findAllByCategoryId(id)), HttpStatus.OK);
+    }
+
+    @Transactional(readOnly = true)
     public ResponseEntity<Message> findById(long id) {
         ResponseEntity<Message> response = null;
         if (subcategoryRepository.existsById(id)) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = {"*"})
 public class SubcategoryController {
     @Autowired
     SubcategoryService subcategoryService;
@@ -15,6 +16,11 @@ public class SubcategoryController {
     @GetMapping("/subcategory")
     public ResponseEntity<Message> getAll() {
         return subcategoryService.findAll();
+    }
+
+    @GetMapping("/subcategory/all/{id}")
+    public ResponseEntity<Message> getAllByCategory(@PathVariable long id) {
+        return subcategoryService.findAllByCategory(id);
     }
 
     @GetMapping("/subcategory/{id}")

@@ -4,6 +4,7 @@ import mx.edu.utez.marketplace.status.model.Status;
 import mx.edu.utez.marketplace.subcategory.model.Subcategory;
 
 import javax.persistence.*;
+import java.util.Base64;
 
 @Entity
 public class Product {
@@ -12,7 +13,9 @@ public class Product {
     private long id;
     private String name;
     private String description;
-    private String file;
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "fileBlob", columnDefinition = "longblob")
+    private byte[] fileBase64;
     private int cuantity;
     private double price;
     @ManyToOne
@@ -25,10 +28,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, String file, int cuantity, double price, Status status, Subcategory subcategory) {
+    public Product(String name, String description, byte[] fileBase64, int cuantity, double price, Status status, Subcategory subcategory) {
         this.name = name;
         this.description = description;
-        this.file = file;
+        this.fileBase64 = fileBase64;
         this.cuantity = cuantity;
         this.price = price;
         this.status = status;
@@ -57,14 +60,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
     }
 
     public Status getStatus() {
@@ -97,5 +92,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getFileBase64() {
+        String file = Base64.getEncoder().encodeToString(this.fileBase64);
+        return file;
+    }
+
+    public void setFileBase64(byte[] fileBase64) {
+        this.fileBase64 = fileBase64;
     }
 }
