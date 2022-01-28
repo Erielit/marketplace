@@ -30,6 +30,10 @@ public class Subcategory {
     public Subcategory() {
     }
 
+    public Subcategory(long id) {
+        this.id = id;
+    }
+
     public Subcategory(String description, Category category) {
         this.description = description;
         this.category = category;

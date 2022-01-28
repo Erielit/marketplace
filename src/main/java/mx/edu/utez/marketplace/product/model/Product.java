@@ -12,6 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Column(columnDefinition = "text")
     private String description;
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "fileBlob", columnDefinition = "longblob")

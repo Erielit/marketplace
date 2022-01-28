@@ -2,6 +2,7 @@ package mx.edu.utez.marketplace.utils;
 
 public class Message {
     private String message;
+    private boolean error;
     private Object data;
 
     public Message() {
@@ -9,6 +10,12 @@ public class Message {
 
     public Message(String message, Object data) {
         this.message = message;
+        this.data = data;
+    }
+
+    public Message(String message, boolean error, Object data) {
+        this.message = message;
+        this.error = error;
         this.data = data;
     }
 
@@ -26,5 +33,13 @@ public class Message {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 }
