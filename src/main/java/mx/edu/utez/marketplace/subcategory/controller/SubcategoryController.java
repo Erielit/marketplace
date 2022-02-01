@@ -18,6 +18,10 @@ public class SubcategoryController {
         return subcategoryService.findAll();
     }
 
+    @GetMapping("/all/{id}")
+    public ResponseEntity<Message> getAllByCategory(@PathVariable long id) {
+        return subcategoryService.findAllByCategory(id);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Message> getById(@PathVariable("id") long id) {
