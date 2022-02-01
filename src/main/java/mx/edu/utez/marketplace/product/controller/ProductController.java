@@ -15,7 +15,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<Message> getAll() {
         return productService.findAll();
     }
@@ -25,14 +25,14 @@ public class ProductController {
         return productService.findById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/")
     public ResponseEntity<Message> save(@RequestBody ProductDTO productDTO) {
         byte[] img = Base64.getDecoder().decode(productDTO.getFile().replace(" ", "+"));
         return productService.save(new Product(productDTO.getName(), productDTO.getDescription(), img, productDTO.getCuantity(), productDTO.getPrice(),
                 productDTO.getStatus(), productDTO.getSubcategory()));
     }
 
-    @PostMapping("/update")
+    @PostMapping("/")
     public ResponseEntity<Message> update(@RequestBody ProductDTO productDTO) {
         byte[] img = Base64.getDecoder().decode(productDTO.getFile().replace(" ", "+"));
         Product product = new Product(productDTO.getName(), productDTO.getDescription(), img, productDTO.getCuantity(), productDTO.getPrice(),
