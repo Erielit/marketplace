@@ -21,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Message> getById(@RequestParam long id) {
+    public ResponseEntity<Message> getById(@PathVariable long id) {
         return productService.findById(id);
     }
 
@@ -32,7 +32,7 @@ public class ProductController {
                 productDTO.getStatus(), productDTO.getSubcategory()));
     }
 
-    @PostMapping("/")
+    @PutMapping("/")
     public ResponseEntity<Message> update(@RequestBody ProductDTO productDTO) {
         byte[] img = Base64.getDecoder().decode(productDTO.getFile().replace(" ", "+"));
         Product product = new Product(productDTO.getName(), productDTO.getDescription(), img, productDTO.getCuantity(), productDTO.getPrice(),
