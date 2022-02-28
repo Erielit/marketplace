@@ -1,15 +1,21 @@
 package mx.edu.utez.marketplace.product.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Base64;
+
 public class ProductImage {
-    private String name;
-    private String file;
+       private String name;
+    private byte[] file;
     private long size;
     private String contentType;
 
     public ProductImage() {
     }
 
-    public ProductImage(String name, String file, long size, String contentType) {
+    public ProductImage(String name, byte[] file, long size, String contentType) {
         this.name = name;
         this.file = file;
         this.size = size;
@@ -22,14 +28,6 @@ public class ProductImage {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
     }
 
     public long getSize() {
@@ -46,5 +44,13 @@ public class ProductImage {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getFile() {
+        return Base64.getEncoder().encodeToString(file);
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }

@@ -13,7 +13,6 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotNull
     private String description;
     @ManyToOne
     @JoinColumn(name = "status_id")

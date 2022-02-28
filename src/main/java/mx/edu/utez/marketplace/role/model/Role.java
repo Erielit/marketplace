@@ -1,8 +1,11 @@
 package mx.edu.utez.marketplace.role.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import mx.edu.utez.marketplace.status.model.Status;
+import mx.edu.utez.marketplace.user.model.User;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Role {
@@ -13,6 +16,9 @@ public class Role {
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private Set<User> users;
 
     public Role() {
     }

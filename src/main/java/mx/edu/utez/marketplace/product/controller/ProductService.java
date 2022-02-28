@@ -20,7 +20,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ResponseEntity<Message> findAll() {
-        return new ResponseEntity<>(new Message("ok",false, productRepository.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("ok", false, productRepository.findAll()), HttpStatus.OK);
     }
 
     @Transactional(readOnly = true)
@@ -38,7 +38,7 @@ public class ProductService {
             return new ResponseEntity<>(new Message("El producto ya existe", true, product), HttpStatus.BAD_REQUEST);
         }
         Product savedProduct = productRepository.saveAndFlush(product);
-        return new ResponseEntity<>(new Message("Producto registrado", false, savedProduct), HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Producto registrado", false, productRepository.findById(savedProduct.getId())), HttpStatus.OK);
     }
 
     @Transactional(rollbackFor = {SQLException.class})

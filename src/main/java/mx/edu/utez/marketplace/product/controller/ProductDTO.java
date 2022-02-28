@@ -1,17 +1,27 @@
 package mx.edu.utez.marketplace.product.controller;
 
+import com.sun.istack.NotNull;
 import mx.edu.utez.marketplace.status.model.Status;
 import mx.edu.utez.marketplace.subcategory.model.Subcategory;
+
+import java.util.Base64;
 
 
 public class ProductDTO {
     private long id;
+    @NotNull
     private String name;
+    @NotNull
     private String description;
+    @NotNull
     private String file;
+    @NotNull
     private int cuantity;
+    @NotNull
     private double price;
+    @NotNull
     private Status status;
+    @NotNull
     private Subcategory subcategory;
 
     public ProductDTO() {
@@ -52,8 +62,8 @@ public class ProductDTO {
         this.description = description;
     }
 
-    public String getFile() {
-        return file;
+    public byte[] getFile() {
+        return Base64.getDecoder().decode(file.replace(" ", "+"));
     }
 
     public void setFile(String file) {

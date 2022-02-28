@@ -27,15 +27,13 @@ public class ProductController {
 
     @PostMapping("/")
     public ResponseEntity<Message> save(@RequestBody ProductDTO productDTO) {
-        byte[] img = Base64.getDecoder().decode(productDTO.getFile().replace(" ", "+"));
-        return productService.save(new Product(productDTO.getName(), productDTO.getDescription(), img, productDTO.getCuantity(), productDTO.getPrice(),
+        return productService.save(new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getFile(), productDTO.getCuantity(), productDTO.getPrice(),
                 productDTO.getStatus(), productDTO.getSubcategory()));
     }
 
     @PutMapping("/")
     public ResponseEntity<Message> update(@RequestBody ProductDTO productDTO) {
-        byte[] img = Base64.getDecoder().decode(productDTO.getFile().replace(" ", "+"));
-        Product product = new Product(productDTO.getName(), productDTO.getDescription(), img, productDTO.getCuantity(), productDTO.getPrice(),
+        Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getFile(), productDTO.getCuantity(), productDTO.getPrice(),
                 productDTO.getStatus(), productDTO.getSubcategory());
         product.setId(productDTO.getId());
         return productService.update(product);

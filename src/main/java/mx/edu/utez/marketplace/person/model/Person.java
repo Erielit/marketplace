@@ -1,9 +1,9 @@
 package mx.edu.utez.marketplace.person.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import mx.edu.utez.marketplace.user.model.User;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,17 +15,32 @@ public class Person {
     private String surname;
     private String lastname;
     private Date birthday;
+    @Column(unique = true)
     private String curp;
+
+    @OneToOne(mappedBy = "person")
+    @JsonIgnore
+    private User user;
 
     public Person() {
     }
-
-    public Person(String name, String surname, String lastname, Date birthday, String curp) {
+    public Person(String name, String surname, String lastname, Date birthday, String curp, User user) {
         this.name = name;
         this.surname = surname;
         this.lastname = lastname;
         this.birthday = birthday;
         this.curp = curp;
+        this.user = user;
+    }
+
+    public Person(long id, String name, String surname, String lastname, Date birthday, String curp, User user) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.curp = curp;
+        this.user = user;
     }
 
     public long getId() {
