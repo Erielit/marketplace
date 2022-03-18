@@ -27,7 +27,8 @@ public class ProductController {
 
     @PostMapping("/")
     public ResponseEntity<Message> save(@RequestBody ProductDTO productDTO) {
-        return productService.save(new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getFile(), productDTO.getCuantity(), productDTO.getPrice(),
+        return productService.save(new Product(productDTO.getName(), productDTO.getDescription(),
+                productDTO.getFile(), productDTO.getCuantity(), productDTO.getPrice(),
                 productDTO.getStatus(), productDTO.getSubcategory()));
     }
 
